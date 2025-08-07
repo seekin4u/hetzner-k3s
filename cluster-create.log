@@ -1,0 +1,19 @@
+[32m _          _                            _    _____     [0m
+[32m| |__   ___| |_ _____ __   ___ _ __     | | _|___ / ___ [0m
+[32m| '_ \ / _ \ __|_  / '_ \ / _ \ '__|____| |/ / |_ \/ __|[0m
+[32m| | | |  __/ |_ / /| | | |  __/ | |_____|   < ___) \__ \[0m
+[32m|_| |_|\___|\__/___|_| |_|\___|_|       |_|\_\____/|___/[0m
+
+[34mVersion: 2.3.8[0m
+
+[Configuration] Validating configuration...
+[Configuration] ...configuration seems valid.
+[Private Network] Creating private network...
+[Private Network] ...private network created
+[SSH key] Creating SSH key...
+[SSH key] ...SSH key created
+[Instance my-cluster-master1] Creating instance my-cluster-master1 (attempt 1)...
+[Instance my-cluster-master1] Instance status: starting
+[Instance my-cluster-master1] Powering on instance (attempt 1)
+[Instance my-cluster-master1] Waiting for instance to be powered on...
+[Instance my-cluster-master1] Instance status: running

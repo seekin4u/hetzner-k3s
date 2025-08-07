@@ -1,0 +1,46 @@
+#hetzner_token: ... -> taken from $HETZNER_TOKEN
+cluster_name: my-cluster
+kubeconfig_path: "./kubeconfig"
+k3s_version: v1.32.0+k3s1
+
+networking:
+  ssh:
+    port: 22
+    use_agent: false
+    public_key_path: "~/.ssh/id_rsa.pub"
+    private_key_path: "~/.ssh/id_rsa"
+  allowed_networks:
+    ssh:
+      - 0.0.0.0/0
+    api:
+      - 0.0.0.0/0 #change if swirching to private
+  public_network:
+    ipv4: true
+    ipv6: true
+  private_network:
+    enabled: true
+    subnet: 10.0.0.0/16
+  cni:
+    enabled: true
+    encryption: false
+    mode: flannel
+
+schedule_workloads_on_masters: true
+masters_pool:
+  instance_type: cx32 
+  instance_count: 1  # For HA
+  locations:
+    - nbg1
+
+#worker_node_pools: {}
+
+protect_against_deletion: false
+create_load_balancer_for_the_kubernetes_api: true
+
+addons:
+  csi_driver:
+    enabled: true   # Hetzner CSI driver (default true). Set to false to skip installation.
+  metrics_server:
+    enabled: true  # Kubernetes metrics-server addon. Disabled by default.
+  cluster_autoscaler:
+    enabled: false   # Cluster Autoscaler addon (default true). Set to false to omit autoscaling.
