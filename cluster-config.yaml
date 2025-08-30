@@ -25,15 +25,23 @@ networking:
     encryption: false
     mode: flannel
 
-schedule_workloads_on_masters: true
+schedule_workloads_on_masters: false
 
 masters_pool:
   instance_type: cax11
   instance_count: 1
   locations: # You can choose a single location for single master clusters or if you prefer to have all masters in the same location. For regional clusters (which are only available in the eu-central network zone), each master needs to be placed in a separate location.
-    - nbg1
+    - hel1
 
-worker_node_pools: []
+worker_node_pools:
+  - name: small
+    instance_type: cpx21
+    instance_count: 5
+    location: hel1
+
+addons:
+  metrics_server:
+    enabled: true  # Kubernetes metrics-server addon. Disabled by default.
 
 protect_against_deletion: false
 
