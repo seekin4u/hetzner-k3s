@@ -20,3 +20,5 @@ maxsauce@192 ~/.ssh$ mv /tmp/merged-kubeconfig ~/.kube/config
 my cluster showed up, now switch to it's context.
 
 k9s, :events, and i see this `Node cloud-master1 event: Registered Node cloud-master1 in Controller`, which means cluster is successfully deployed.
+
+To delete a cluster: export HCLOUD_TOKEN, then `hetzner-k3s delete --config cluster-config.yaml`, enter cluster name and wait.
