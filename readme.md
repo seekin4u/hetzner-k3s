@@ -16,10 +16,13 @@ maxsauce@192 ~/.ssh$ ssh-keygen -E md5 -lf ~/.ssh/id_ecdsa.pub
 521 MD5:e2:6a:33:55:65:1f:83:24:aa:c0:02:e0:81:be:b7:b9 maxsauce@192.168.1.7 (ECDSA)
 Fingerprint was different that the one in the cloud, because i did not recreate whole project and thus did not delete the key conpletely.
 
+---
+
 After completion, i've got kubeconfig and kubeconfig-cloud, one of them was unfinished for some reason.
 KUBECONFIG=~/.kube/config:./kubeconfig kubectl config view --flatten > /tmp/merged-kubeconfig
 removed one unfinished cluster declaration
-maxsauce@192 ~/.ssh$ mv /tmp/merged-kubeconfig ~/.kube/config
+mv /tmp/merged-kubeconfig ~/.kube/config
+
 my cluster showed up, now switch to it's context.
 
 k9s, :events, and i see this `Node cloud-master1 event: Registered Node cloud-master1 in Controller`, which means cluster is successfully deployed.
