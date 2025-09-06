@@ -1,0 +1,64 @@
+cluster_name: cloud
+kubeconfig_path: "./kubeconfig"
+k3s_version: v1.33.1+k3s1
+
+networking:
+  ssh:
+    port: 22
+    use_agent: false # set to true if your key has a passphrase
+    public_key_path: "~/.ssh/id_ecdsa.pub"
+    private_key_path: "~/.ssh/id_ecdsa"
+  allowed_networks:
+    ssh:
+      - 0.0.0.0/0
+    api: # this will firewall port 6443 on the nodes
+      - 0.0.0.0/0
+  public_network:
+    ipv4: true
+    ipv6: true
+  private_network:
+    enabled: true
+    subnet: 10.0.0.0/16
+    existing_network_name: ""
+  cni:
+    enabled: true
+    encryption: false
+    mode: flannel
+
+schedule_workloads_on_masters: true
+#false
+
+masters_pool:
+  instance_type: cpx21
+  instance_count: 1
+  locations: # You can choose a single location for single master clusters or if you prefer to have all masters in the same location. For regional clusters (which are only available in the eu-central network zone), each master needs to be placed in a separate location.
+    - hel1
+
+worker_node_pools: []
+# worker_node_pools:
+#   - name: small
+#     instance_type: cpx21
+#     instance_count: 5
+#     location: hel1
+
+addons:
+  metrics_server:
+    enabled: true  # Kubernetes metrics-server addon. Disabled by default.
+
+protect_against_deletion: false
+
+create_load_balancer_for_the_kubernetes_api: true # Just a heads up: right now, we can’t limit access to the load balancer by IP through the firewall. This feature hasn’t been added by Hetzner yet.
+
+k3s_upgrade_concurrency: 1 # how many nodes to upgrade at the same time
+
+additional_packages:
+  - zsh
+  - unattended-upgrades
+  - update-notifier-common
+
+additional_pre_k3s_commands:
+  - sudo apt-get update
+  - sudo apt-get upgrade -y
+  - sudo apt-get autoremove -y
+  - sudo systemctl enable unattended-upgrades
+  - sudo systemctl start unattended-upgrades
