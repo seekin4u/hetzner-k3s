@@ -22,24 +22,24 @@ resource "kubernetes_namespace" "apps" {
 #   ]
 # }
 
-# resource "helm_release" "kube_prometheus_stack" {
-#   name             = "monitoring"
-#   namespace        = "monitoring"
-#   create_namespace = true
+resource "helm_release" "kube_prometheus_stack" {
+  name             = "monitoring"
+  namespace        = "monitoring"
+  create_namespace = true
 
-#   repository = "https://prometheus-community.github.io/helm-charts"
-#   chart      = "kube-prometheus-stack"
+  repository = "https://prometheus-community.github.io/helm-charts"
+  chart      = "kube-prometheus-stack"
 
-#   values = [
-#     yamlencode({
-#       prometheus = {
-#         prometheusSpec = {
-#           maximumStartupDurationSeconds = 300
-#         }
-#       }
-#     })
-#   ]
-# }
+  values = [
+    yamlencode({
+      prometheus = {
+        prometheusSpec = {
+          maximumStartupDurationSeconds = 300
+        }
+      }
+    })
+  ]
+}
 
 resource "helm_release" "preview_sweeper" {
   name             = "namespace-preview-sweeper"
@@ -54,8 +54,8 @@ resource "helm_release" "preview_sweeper" {
       replicaCount   = 1
       serviceMonitor = { enabled = true } #false without monitoring
       leaderElection = { enabled = false }
-      sweepEvery = "30m"
-      ttl        = "1h"
+      sweepEvery = "1m"
+      ttl        = "2m"
     })
   ]
 }

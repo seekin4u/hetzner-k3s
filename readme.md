@@ -20,7 +20,10 @@ Fingerprint was different that the one in the cloud, because i did not recreate 
 
 After completion, i've got kubeconfig and kubeconfig-cloud, one of them was unfinished for some reason.
 KUBECONFIG=~/.kube/config:./kubeconfig kubectl config view --flatten > /tmp/merged-kubeconfig
+nano /tmp/merged-kubeconfig 
+
 removed one unfinished cluster declaration
+
 mv /tmp/merged-kubeconfig ~/.kube/config
 
 my cluster showed up, now switch to it's context.
